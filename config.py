@@ -1,0 +1,18 @@
+from pathlib import Path
+
+N_ITERATIONS = 3
+OPENAI_MODEL = "gpt-6-sol"
+OPENAI_REASONING_EFFORT = "none"
+OPENAI_INPUT_PRICE_PER_MILLION = 2.00
+OPENAI_OUTPUT_PRICE_PER_MILLION = 10.00
+OPENAI_CACHED_INPUT_PRICE_PER_MILLION = 0.20
+
+JEV_MODEL = "typesafe/jev-1.13"
+JEV_ENDPOINT = "https://openrouter.ai/api/alpha/decisions"
+
+PROJECT_DIR = Path(__file__).resolve().parent
+QUESTIONS_PATH = PROJECT_DIR / "classification_questions.json"
+DATABASE_PATH = PROJECT_DIR / "results.db"
+REQUEST_TIMEOUT_SECONDS = 60
+MAX_ATTEMPTS = 3
+RETRY_DELAYS_SECONDS = (1, 2)

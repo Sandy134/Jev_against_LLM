@@ -1,0 +1,7 @@
+langchain
+langchain-openai
+requests
+python-dotenv
+pandas
+matplotlib
+numpy

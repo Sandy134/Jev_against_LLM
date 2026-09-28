@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111412">
+  <title>Decision Benchmark | Jev vs GPT-6 Sol</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111412;
+      --surface: #191d1a;
+      --surface-raised: #202522;
+      --line: #303833;
+      --text: #eff3ed;
+      --muted: #9ba69d;
+      --faint: #667169;
+      --jev: #b7ef75;
+      --openai: #79c8f2;
+      --warm: #ff9876;
+      --good: #b7ef75;
+      --bad: #ff9876;
+      --mono: "DM Mono", Consolas, monospace;
+      --sans: "Manrope", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        var(--bg);
+      background-size: 44px 44px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+    }
+    button, input, select { font: inherit; }
+    .shell { width: min(1440px, 100% - 56px); margin: 0 auto; padding: 28px 0 48px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid #5e7648; color: var(--jev); font: 500 13px var(--mono); transform: rotate(-4deg); }
+    .brand-copy { display: grid; gap: 3px; }
+    .brand-copy strong { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+    .brand-copy span, .eyebrow, .mono { color: var(--muted); font-family: var(--mono); font-size: 10px; letter-spacing: .04em; }
+    .live-state { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font: 11px var(--mono); white-space: nowrap; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jev); box-shadow: 0 0 12px #b7ef7580; }
+    .hero { display: flex; justify-content: space-between; align-items: end; gap: 32px; padding: 34px 0 28px; }
+    .hero h1 { margin: 9px 0 8px; font-size: clamp(26px, 3vw, 39px); line-height: 1.12; font-weight: 600; letter-spacing: 0; }
+    .hero p { max-width: 620px; margin: 0; color: var(--muted); line-height: 1.65; }
+    .controls { display: flex; flex-wrap: wrap; justify-content: end; gap: 9px; align-items: end; }
+    .control { display: grid; gap: 6px; color: var(--muted); font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .control select, .control input { min-width: 120px; height: 38px; padding: 0 11px; border: 1px solid var(--line); border-radius: 3px; outline: none; background: #171b18; color: var(--text); }
+    .control input { width: 132px; font-family: var(--mono); }
+    .control select:focus, .control input:focus { border-color: var(--jev); }
+    .section-kicker { display: flex; justify-content: space-between; align-items: center; margin: 5px 0 12px; color: var(--muted); font: 10px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .kpi { min-height: 142px; padding: 17px 18px; border: 1px solid var(--line); background: linear-gradient(135deg, #1b201c, #171a18); }
+    .kpi-label { color: var(--muted); font: 10px var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    .kpi-value { margin-top: 17px; font-size: 30px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+    .kpi-foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 11px; }
+    .jev-text { color: var(--jev); }
+    .openai-text { color: var(--openai); }
+    .delta { font-family: var(--mono); white-space: nowrap; }
+    .panel-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .85fr); gap: 12px; margin-top: 12px; }
+    .panel { min-width: 0; border: 1px solid var(--line); background: rgba(25,29,26,.96); }
+    .panel-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; padding: 17px 18px 12px; border-bottom: 1px solid var(--line); }
+    .panel-head h2 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0; }
+    .panel-head p { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
+    .chart-key { display: flex; gap: 12px; color: var(--muted); font: 10px var(--mono); white-space: nowrap; }
+    .key { display: inline-flex; gap: 6px; align-items: center; }
+    .swatch { width: 8px; height: 8px; background: var(--jev); }
+    .swatch.openai { background: var(--openai); }
+    .chart-wrap { padding: 12px 16px 16px; }
+    svg.chart { display: block; width: 100%; overflow: visible; }
+    .chart-empty { display: grid; min-height: 170px; place-items: center; color: var(--muted); font-size: 12px; }
+    .model-list { display: grid; }
+    .model-row { display: grid; grid-template-columns: minmax(100px, 1.15fr) repeat(3, minmax(64px, 1fr)); gap: 10px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+    .model-row:last-child { border-bottom: 0; }
+    .model-name { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+    .model-name::before { width: 7px; height: 7px; background: var(--jev); content: ""; }
+    .model-row.openai .model-name::before { background: var(--openai); }
+    .stat { display: grid; gap: 4px; text-align: right; font-variant-numeric: tabular-nums; }
+    .stat span { color: var(--muted); font: 9px var(--mono); text-transform: uppercase; }
+    .stat strong { font: 13px var(--mono); }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 12px 16px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th { color: var(--faint); font: 9px var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+    td { color: #d9dfd9; font-size: 12px; font-variant-numeric: tabular-nums; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .confidence { padding: 18px; }
+    .confidence-row { display: grid; grid-template-columns: 92px 1fr 40px; gap: 10px; align-items: center; margin: 13px 0; color: var(--muted); font-size: 11px; }
+    .track { height: 7px; background: #303833; }
+    .fill { height: 100%; background: var(--jev); transition: width .35s ease; }
+    .fill.incorrect { background: var(--warm); }
+    .confidence-row strong { color: var(--text); font: 10px var(--mono); text-align: right; }
+    .footer { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; color: var(--faint); font: 9px var(--mono); }
+    .loading { opacity: .6; pointer-events: none; }
+    .error { display: none; margin: 16px 0; padding: 12px 14px; border: 1px solid #8a4f3e; background: #2b1c18; color: #ffc1ab; font-size: 12px; }
+    .error.visible { display: block; }
+    @media (max-width: 940px) {
+      .shell { width: min(100% - 32px, 760px); }
+      .hero { align-items: start; flex-direction: column; gap: 20px; }
+      .controls { justify-content: start; }
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .panel-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .shell { width: calc(100% - 24px); padding-top: 16px; }
+      .topbar { padding-bottom: 18px; }
+      .hero { padding: 24px 0 20px; }
+      .hero h1 { font-size: 27px; }
+      .controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+      .control select, .control input { min-width: 0; width: 100%; }
+      .control:last-child { grid-column: 1 / -1; }
+      .kpi-grid { gap: 7px; }
+      .kpi { min-height: 126px; padding: 13px; }
+      .kpi-value { font-size: 25px; }
+      .kpi-foot { font-size: 10px; }
+      .panel-head { padding: 14px; }
+      .chart-key { gap: 8px; font-size: 9px; }
+      .model-row { grid-template-columns: minmax(92px, 1.2fr) repeat(3, minmax(53px, 1fr)); gap: 5px; padding: 13px 10px; }
+      .model-name { gap: 5px; font-size: 11px; }
+      .stat span { font-size: 8px; }
+      .stat strong { font-size: 11px; }
+      .footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="shell" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">D/</div>
+        <div class="brand-copy"><strong>Decision systems</strong><span>BENCHMARK / 01</span></div>
+      </div>
+      <div class="live-state"><i class="live-dot" aria-hidden="true"></i><span id="live-label">LIVE DATA</span></div>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <div class="eyebrow">JEV 1.13 <span aria-hidden="true">/</span> GPT-6 SOL</div>
+        <h1 id="page-title">Which model makes the better call?</h1>
+        <p>Classification decision quality, speed, and unit economics. Every comparison below uses successful, parsed decisions only.</p>
+      </div>
+      <div class="controls" aria-label="Dashboard filters">
+        <label class="control">Difficulty
+          <select id="difficulty-filter"><option value="all">All levels</option><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select>
+        </label>
+        <label class="control">Iteration
+          <select id="iteration-filter"><option value="all">All iterations</option><option value="1">Iteration 1</option><option value="2">Iteration 2</option><option value="3">Iteration 3</option></select>
+        </label>
+        <label class="control">Requests / day
+          <input id="volume-filter" type="number" min="0" max="1000000" step="1000" value="10000" inputmode="numeric">
+        </label>
+      </div>
+    </section>
+
+    <div class="error" id="error" role="alert"></div>
+
+    <div class="section-kicker"><span>Decision KPIs</span><span id="sample-size">— successful decisions</span></div>
+    <section class="kpi-grid" aria-label="Key performance indicators">
+      <article class="kpi"><div class="kpi-label">Accuracy leader</div><div class="kpi-value" id="accuracy-value">—</div><div class="kpi-foot"><span id="accuracy-detail">Waiting for data</span><span class="delta" id="accuracy-delta">—</span></div></article>
+      <article class="kpi"><div class="kpi-label">Faster median decision</div><div class="kpi-value" id="latency-value">—</div><div class="kpi-foot"><span id="latency-detail">p50 response time</span><span class="delta" id="latency-delta">—</span></div></article>
+      <article class="kpi"><div class="kpi-label">Lowest cost / correct call</div><div class="kpi-value" id="unit-cost-value">—</div><div class="kpi-foot"><span id="unit-cost-detail">Spend per correct decision</span><span class="delta" id="unit-cost-delta">—</span></div></article>
+      <article class="kpi"><div class="kpi-label">Projected monthly spend</div><div class="kpi-value" id="monthly-value">—</div><div class="kpi-foot"><span id="monthly-detail">At 10,000 requests / day</span><span class="delta" id="monthly-delta">—</span></div></article>
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel">
+        <div class="panel-head"><div><h2>Accuracy by difficulty</h2><p>Correct decisions / successful parsed responses</p></div><div class="chart-key"><span class="key"><i class="swatch"></i>Jev</span><span class="key"><i class="swatch openai"></i>GPT-6 Sol</span></div></div>
+        <div class="chart-wrap" id="accuracy-chart-wrap"><svg class="chart" id="accuracy-chart" viewBox="0 0 600 230" role="img" aria-label="Grouped accuracy bar chart"></svg></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Response profile</h2><p>Median and tail latency across successful calls</p></div><div class="chart-key"><span class="key"><i class="swatch"></i>Jev</span><span class="key"><i class="swatch openai"></i>GPT-6 Sol</span></div></div>
+        <div class="model-list" id="latency-list"></div>
+        <div class="chart-wrap"><svg class="chart" id="iteration-chart" viewBox="0 0 600 160" role="img" aria-label="Mean latency by iteration"></svg></div>
+      </article>
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel">
+        <div class="panel-head"><div><h2>Decision economics</h2><p>Observed spend and projected operating cost</p></div><span class="eyebrow">USD</span></div>
+        <div class="table-scroll"><table><thead><tr><th>Model</th><th>Avg / call</th><th>Cost / correct</th><th>Monthly projection</th><th>Successful N</th></tr></thead><tbody id="economics-body"></tbody></table></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Jev confidence signal</h2><p>Mean confidence by realized outcome</p></div><span class="eyebrow">CALIBRATION</span></div>
+        <div class="confidence" id="confidence-panel"></div>
+      </article>
+    </section>
+
+    <footer class="footer"><span id="source-note">Successful parsed rows only</span><span id="updated-at">Updating…</span></footer>
+  </main>
+
+  <script>
+    const colors = { jev: "#b7ef75", openai: "#79c8f2", grid: "#303833", text: "#9ba69d" };
+    const names = { jev: "Jev 1.13", openai: "GPT-6 Sol" };
+    const $ = (id) => document.getElementById(id);
+    let refreshTimer;
+
+    function percent(value, decimals = 1) {
+      return value == null ? "—" : `${(value * 100).toFixed(decimals)}%`;
+    }
+    function money(value, decimals = 4) {
+      if (value == null || !Number.isFinite(value)) return "—";
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);
+    }
+    function compactMoney(value) {
+      if (value == null || !Number.isFinite(value)) return "—";
+      return value >= 1000 ? `$${(value / 1000).toFixed(1)}k` : money(value, 2);
+    }
+    function duration(value) {
+      if (value == null || !Number.isFinite(value)) return "—";
+      return value >= 1000 ? `${(value / 1000).toFixed(2)} s` : `${Math.round(value)} ms`;
+    }
+    function setText(id, value) { $(id).textContent = value; }
+    function svgNode(tag, attrs = {}, text = "") {
+      const node = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+      if (text) node.textContent = text;
+      return node;
+    }
+    function drawAccuracyChart(data) {
+      const svg = $("accuracy-chart");
+      svg.replaceChildren();
+      const width = 600, height = 230, left = 48, right = 12, top = 12, bottom = 38;
+      const plotHeight = height - top - bottom, plotWidth = width - left - right;
+      for (let tick = 0; tick <= 4; tick++) {
+        const value = tick / 4, y = top + plotHeight * (1 - value);
+        svg.append(svgNode("line", { x1: left, y1: y, x2: width - right, y2: y, stroke: colors.grid, "stroke-width": 1 }));
+        svg.append(svgNode("text", { x: left - 9, y: y + 4, fill: colors.text, "font-size": 10, "text-anchor": "end", "font-family": "DM Mono, monospace" }, `${value * 100}%`));
+      }
+      const groups = data.filter((item) => item.jev_accuracy != null || item.openai_accuracy != null);
+      if (!groups.length) { svg.append(svgNode("text", { x: width / 2, y: height / 2, fill: colors.text, "text-anchor": "middle", "font-size": 12 }, "No successful decisions for this filter")); return; }
+      const groupWidth = plotWidth / groups.length, barWidth = Math.min(36, groupWidth * .25);
+      groups.forEach((item, index) => {
+        const center = left + groupWidth * (index + .5);
+        [["jev", item.jev_accuracy], ["openai", item.openai_accuracy]].forEach(([model, score], pairIndex) => {
+          if (score == null) return;
+          const barHeight = Math.max(2, score * plotHeight);
+          const x = center + (pairIndex === 0 ? -barWidth - 3 : 3);
+          const y = top + plotHeight - barHeight;
+          svg.append(svgNode("rect", { x, y, width: barWidth, height: barHeight, fill: colors[model], rx: 2, opacity: .92 }));
+          svg.append(svgNode("text", { x: x + barWidth / 2, y: Math.max(top + 10, y - 6), fill: colors[model], "font-size": 9, "text-anchor": "middle", "font-family": "DM Mono, monospace" }, `${(score * 100).toFixed(0)}%`));
+        });
+        svg.append(svgNode("text", { x: center, y: height - 12, fill: colors.text, "font-size": 10, "text-anchor": "middle", "font-family": "DM Mono, monospace" }, item.difficulty));
+      });
+    }
+    function drawIterationChart(data) {
+      const svg = $("iteration-chart");
+      svg.replaceChildren();
+      const width = 600, height = 160, left = 48, right = 12, top = 12, bottom = 28;
+      const plotHeight = height - top - bottom, plotWidth = width - left - right;
+      const values = data.flatMap((item) => [item.jev_latency_ms, item.openai_latency_ms]).filter((value) => value != null);
+      if (!values.length) { svg.append(svgNode("text", { x: width / 2, y: height / 2, fill: colors.text, "text-anchor": "middle", "font-size": 12 }, "No latency data")); return; }
+      const maxValue = Math.max(...values, 1) * 1.15;
+      for (let tick = 0; tick <= 2; tick++) {
+        const y = top + plotHeight * tick / 2;
+        svg.append(svgNode("line", { x1: left, y1: y, x2: width - right, y2: y, stroke: colors.grid, "stroke-width": 1 }));
+      }
+      const points = { jev: [], openai: [] };
+      data.forEach((item, index) => {
+        const x = left + (data.length === 1 ? plotWidth / 2 : plotWidth * index / (data.length - 1));
+        for (const model of ["jev", "openai"]) {
+          const value = item[`${model}_latency_ms`];
+          if (value == null) continue;
+          const y = top + plotHeight * (1 - value / maxValue);
+          points[model].push(`${x},${y}`);
+          svg.append(svgNode("circle", { cx: x, cy: y, r: 4, fill: colors[model] }));
+        }
+        svg.append(svgNode("text", { x, y: height - 8, fill: colors.text, "font-size": 10, "text-anchor": "middle", "font-family": "DM Mono, monospace" }, `iter ${item.iteration}`));
+      });
+      for (const model of ["jev", "openai"]) {
+        if (points[model].length > 1) svg.append(svgNode("polyline", { points: points[model].join(" "), fill: "none", stroke: colors[model], "stroke-width": 2, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+      }
+    }
+    function render(data) {
+      const models = data.models, jev = models.jev, openai = models.openai;
+      const leaders = [jev, openai].filter((item) => item.accuracy != null).sort((a, b) => b.accuracy - a.accuracy);
+      const accuracyLeader = leaders[0];
+      setText("accuracy-value", accuracyLeader ? percent(accuracyLeader.accuracy) : "—");
+      setText("accuracy-detail", accuracyLeader ? `${accuracyLeader.label} · ${accuracyLeader.correct}/${accuracyLeader.calls} correct` : "No successful decisions");
+      setText("accuracy-delta", jev.accuracy != null && openai.accuracy != null ? `${((jev.accuracy - openai.accuracy) * 100).toFixed(1)} pp Jev` : "—");
+      const faster = [jev, openai].filter((item) => item.p50_ms != null).sort((a, b) => a.p50_ms - b.p50_ms)[0];
+      setText("latency-value", faster ? duration(faster.p50_ms) : "—");
+      setText("latency-detail", faster ? `${faster.label} p50 · p95 ${duration(faster.p95_ms)}` : "No successful latency data");
+      const latencyRatio = jev.p50_ms && openai.p50_ms ? Math.abs(jev.p50_ms - openai.p50_ms) / Math.max(jev.p50_ms, openai.p50_ms) * 100 : null;
+      setText("latency-delta", latencyRatio == null ? "—" : `${latencyRatio.toFixed(0)}% gap`);
+      const unitLeaders = [jev, openai].filter((item) => item.cost_per_correct_usd != null).sort((a, b) => a.cost_per_correct_usd - b.cost_per_correct_usd);
+      setText("unit-cost-value", unitLeaders.length ? money(unitLeaders[0].cost_per_correct_usd, 5) : "—");
+      setText("unit-cost-detail", unitLeaders.length ? `${unitLeaders[0].label} · cost per correct decision` : "No correct decisions in selection");
+      const unitRatio = jev.cost_per_correct_usd && openai.cost_per_correct_usd ? Math.abs(jev.cost_per_correct_usd - openai.cost_per_correct_usd) / Math.max(jev.cost_per_correct_usd, openai.cost_per_correct_usd) * 100 : null;
+      setText("unit-cost-delta", unitRatio == null ? "—" : `${unitRatio.toFixed(0)}% gap`);
+      const monthlyLeader = [jev, openai].filter((item) => item.projected_monthly_cost_usd != null).sort((a, b) => a.projected_monthly_cost_usd - b.projected_monthly_cost_usd)[0];
+      setText("monthly-value", monthlyLeader ? compactMoney(monthlyLeader.projected_monthly_cost_usd) : "—");
+      setText("monthly-detail", `Lower spend · ${Number(data.filters.daily_volume).toLocaleString()} requests / day`);
+      setText("monthly-delta", monthlyLeader ? monthlyLeader.label : "—");
+      setText("sample-size", `${data.successful_rows.toLocaleString()} successful decisions`);
+
+      $("latency-list").replaceChildren();
+      for (const model of [jev, openai]) {
+        const row = document.createElement("div");
+        row.className = `model-row ${model.key}`;
+        row.innerHTML = `<div class="model-name">${model.label}</div><div class="stat"><span>p50</span><strong>${duration(model.p50_ms)}</strong></div><div class="stat"><span>p95</span><strong>${duration(model.p95_ms)}</strong></div><div class="stat"><span>Mean</span><strong>${duration(model.mean_latency_ms)}</strong></div>`;
+        $("latency-list").append(row);
+      }
+      $("economics-body").replaceChildren();
+      for (const model of [jev, openai]) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td class="${model.key}-text">${model.label}</td><td>${money(model.mean_cost_usd, 5)}</td><td>${money(model.cost_per_correct_usd, 5)}</td><td>${money(model.projected_monthly_cost_usd, 2)}</td><td>${model.calls.toLocaleString()}</td>`;
+        $("economics-body").append(row);
+      }
+      $("confidence-panel").replaceChildren();
+      const confidenceRows = [
+        ["Correct calls", data.confidence.correct, ""],
+        ["Incorrect calls", data.confidence.incorrect, "incorrect"],
+      ];
+      for (const [label, value, kind] of confidenceRows) {
+        const confidenceRow = document.createElement("div");
+        confidenceRow.className = "confidence-row";
+        const safeValue = value == null ? 0 : Math.max(0, Math.min(1, value));
+        confidenceRow.innerHTML = `<span>${label}</span><div class="track"><div class="fill ${kind}" style="width:${safeValue * 100}%"></div></div><strong>${value == null ? "—" : percent(value, 0)}</strong>`;
+        $("confidence-panel").append(confidenceRow);
+      }
+      drawAccuracyChart(data.by_difficulty);
+      drawIterationChart(data.by_iteration);
+      setText("source-note", `Successful parsed rows only · ${data.source}`);
+      setText("updated-at", data.updated_at ? `DB updated ${data.updated_at} · refreshed ${new Date().toLocaleTimeString()}` : `No successful rows yet · refreshed ${new Date().toLocaleTimeString()}`);
+      setText("live-label", "LIVE DATA");
+      $("error").classList.remove("visible");
+      $("app").classList.remove("loading");
+    }
+    async function refresh() {
+      $("app").classList.add("loading");
+      const params = new URLSearchParams({
+        difficulty: $("difficulty-filter").value,
+        iteration: $("iteration-filter").value,
+        daily_volume: String(Math.max(0, Math.min(1000000, Number($("volume-filter").value) || 0))),
+      });
+      try {
+        const response = await fetch(`/api/dashboard?${params}`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Dashboard API returned HTTP ${response.status}`);
+        render(await response.json());
+      } catch (error) {
+        $("app").classList.remove("loading");
+        $("error").textContent = `${error.message}. Start the dashboard server and refresh this page.`;
+        $("error").classList.add("visible");
+        setText("live-label", "DATA UNAVAILABLE");
+      }
+    }
+    for (const id of ["difficulty-filter", "iteration-filter"]) $(id).addEventListener("change", refresh);
+    $("volume-filter").addEventListener("change", refresh);
+    $("volume-filter").addEventListener("keydown", (event) => { if (event.key === "Enter") refresh(); });
+    refresh();
+    refreshTimer = window.setInterval(refresh, 30000);
+  </script>
+</body>
+</html>

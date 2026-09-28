@@ -1,0 +1,702 @@
+[
+  {
+    "id": "q001",
+    "question": "I was charged twice for my subscription this month, please refund the duplicate charge.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q002",
+    "question": "The app crashes every time I try to open the camera feature.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "technical_support"
+  },
+  {
+    "id": "q003",
+    "question": "I want to update the email address linked to my account.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q004",
+    "question": "Please cancel my subscription immediately, I no longer need this service.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "cancellation"
+  },
+  {
+    "id": "q005",
+    "question": "Do you have a version of this product that supports left-handed users?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q006",
+    "question": "Your delivery driver was extremely rude to me today.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "complaint"
+  },
+  {
+    "id": "q007",
+    "question": "My invoice shows a tax amount that seems higher than expected, can you check?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q008",
+    "question": "I can't log in, it keeps saying 'invalid password' even though I reset it.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "technical_support"
+  },
+  {
+    "id": "q009",
+    "question": "I'd like to change my shipping address for future orders.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q010",
+    "question": "I want to end my membership at the end of this billing cycle.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "cancellation"
+  },
+  {
+    "id": "q011",
+    "question": "What's the maximum weight capacity of the XL model?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q012",
+    "question": "This is the third time my order has arrived damaged, I'm very unhappy.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "complaint"
+  },
+  {
+    "id": "q013",
+    "question": "Can I get a copy of my payment receipt from last month?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q014",
+    "question": "The mobile app freezes on the checkout screen.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "technical_support"
+  },
+  {
+    "id": "q015",
+    "question": "How do I add a second user to my account?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q016",
+    "question": "I don't want to be charged again, please cancel my plan before the renewal date.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "easy",
+    "correct_answer": "cancellation"
+  },
+  {
+    "id": "q017",
+    "question": "I upgraded my plan last week but I'm still being billed at the old rate \u2014 is this a billing issue or has my upgrade not gone through?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q018",
+    "question": "The product description says it's waterproof but mine stopped working after getting wet \u2014 is this expected?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "complaint"
+  },
+  {
+    "id": "q019",
+    "question": "I want to downgrade my plan but keep my saved data \u2014 how does that work?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q020",
+    "question": "Every time I open the app on my new phone it logs me out automatically.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "technical_support"
+  },
+  {
+    "id": "q021",
+    "question": "My renewal date is in two days, but I already told support I wanted to cancel \u2014 why was I charged again?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "cancellation"
+  },
+  {
+    "id": "q022",
+    "question": "Is there a bulk discount if I order more than 50 units?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q023",
+    "question": "I've submitted three support tickets about my broken speaker and no one has responded \u2014 I'm giving up on this brand.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "complaint"
+  },
+  {
+    "id": "q024",
+    "question": "Can you explain the difference between the Pro and Enterprise tiers?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q025",
+    "question": "I moved to a new country, do I need to set up a new account or can I keep this one?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q026",
+    "question": "The refund you promised two weeks ago still hasn't shown up in my bank account.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q027",
+    "question": "My subscription auto-renewed even though I turned off auto-renew in settings \u2014 please look into this.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "cancellation"
+  },
+  {
+    "id": "q028",
+    "question": "The instructions say to charge the device for 2 hours but mine still won't turn on after 4 hours.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "technical_support"
+  },
+  {
+    "id": "q029",
+    "question": "I'd like to merge my two accounts into one.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q030",
+    "question": "Are there any promotions running for new customers this month?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q031",
+    "question": "I was quoted one price on the phone and charged a different, higher price on my card.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q032",
+    "question": "This is unacceptable \u2014 I've been on hold for 45 minutes and no one has picked up.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "complaint"
+  },
+  {
+    "id": "q033",
+    "question": "Can I pause my membership instead of canceling it completely?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "medium",
+    "correct_answer": "cancellation"
+  },
+  {
+    "id": "q034",
+    "question": "I paid for the annual plan but was auto-downgraded to monthly without asking \u2014 now I'm being billed every month at a higher rate than I agreed to. I don't even know if I want to keep using this anymore.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q035",
+    "question": "Since the last update, notifications are all messed up, half of them don't show and it's honestly making me consider switching to a competitor.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "technical_support"
+  },
+  {
+    "id": "q036",
+    "question": "I don't want to be a customer anymore, but before I go, why does the product page still say 'free returns' when I was charged a restocking fee?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q037",
+    "question": "Not sure who to ask, but is the premium tier's API rate limit per account or per API key, and does that change if I add a teammate?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q038",
+    "question": "My card on file expired and now I can't access features I already paid for this month \u2014 feels like I'm being punished for something I didn't even do wrong.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q039",
+    "question": "I keep getting asked to verify my identity every single login, even on devices I've used for years \u2014 is this a bug or new policy?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "technical_support"
+  },
+  {
+    "id": "q040",
+    "question": "The onboarding email said I'd get a 14-day trial, but I was charged on day 3 \u2014 I want that reversed and honestly I'm reconsidering signing up at all.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q041",
+    "question": "Can existing customers switch from monthly to annual mid-cycle, and if so, do I lose the days I already paid for this month?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q042",
+    "question": "It's been silent for two days after I reported that my package tracking shows 'delivered' but I never received it \u2014 starting to think I should just dispute the charge with my bank.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "complaint"
+  },
+  {
+    "id": "q043",
+    "question": "Every plan comparison page shows different storage limits for the same tier \u2014 which one is actually correct, and will my files get deleted if I'm already over the real limit?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q044",
+    "question": "I told the chatbot three times I wanted to close my account, and it kept looping me back to a discount offer instead of doing it \u2014 extremely frustrating.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "cancellation"
+  },
+  {
+    "id": "q045",
+    "question": "Are seasonal employees eligible for the team discount, or only full-time staff \u2014 and does that apply retroactively to orders from last quarter?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q046",
+    "question": "I updated my email in settings weeks ago but all my invoices still go to the old inbox \u2014 is that a setting that didn't save or is billing pulling from somewhere else?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q047",
+    "question": "This will be my last message: either fix the recurring double-charges or I'm closing the account and reporting this to my card issuer.",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "billing"
+  },
+  {
+    "id": "q048",
+    "question": "Is it possible to get a trial extension if I was locked out due to a login bug for half the trial period?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "account_management"
+  },
+  {
+    "id": "q049",
+    "question": "The comparison chart says the base plan includes priority support, but when I contacted support I was told that's only for Pro \u2014 can someone confirm which is accurate before I decide whether to upgrade or just leave?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "product_inquiry"
+  },
+  {
+    "id": "q050",
+    "question": "I only used the service for 4 days this month but got charged the full amount, and the FAQ says partial months should be prorated \u2014 can you look into both the charge and why the FAQ doesn't match what happened?",
+    "options": [
+      "billing",
+      "technical_support",
+      "account_management",
+      "cancellation",
+      "product_inquiry",
+      "complaint"
+    ],
+    "difficulty": "hard",
+    "correct_answer": "billing"
+  }
+]
